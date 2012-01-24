@@ -1,0 +1,1 @@
+I18n.send :include, TranslationFallbacks::I18nTranslationHelper
