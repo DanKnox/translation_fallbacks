@@ -1,3 +1,17 @@
 = TranslationFallbacks
 
 This project rocks and uses MIT-LICENSE.
+
+Locale fallbacks work like so... 
+
+If locale is <tt>es-override</tt> and a translation is missing, it will check <tt>es</tt> first then <tt>:default_locale</tt>
+
+== Update - Dan Knox
+
+I can't remember who I cloned this from. If you wrote the original code for this let me know and I will link you.
+
+== Changelog
+
+I created a ruby gem out of the original project and added default HTML output for languages other than English.
+
+Most other languages require special characters. It is a pain to add the .html tag to each translation key.
