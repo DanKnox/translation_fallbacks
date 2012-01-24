@@ -1,8 +1,6 @@
 module TranslationFallbacks
   module I18nTranslationHelper
-    # To use do:
-    #   require 'i18n_helper'
-    #   I18n.send :include, I18nTranslationHelper
+    # To use just add the gem to your Gemfile
 
     def self.included(base) 
       base.module_eval do
@@ -11,7 +9,17 @@ module TranslationFallbacks
             default = options.delete(:default)
             locale_lookup_chain(options[:locale] || locale).each do |lookup_locale|
               translation_found, translation = attempt_translation(text, options.merge(:locale => lookup_locale))
-              return translation if translation_found
+              print "#{translation_found.inspect}"
+              #DEBUG_LOG.info "#{translation_found.inspect}"
+              if translation_found
+                case translation
+                when Hash then return translation
+                when String then return translation.html_safe
+                when Symbol then return translation
+                else return translation
+                end
+              end
+              #return translation.html_safe if translation_found
             end
             # Ensure 'translation missing' return is exactly the default behaviour
             translate_without_fallback(text, options.merge(:default => default))
